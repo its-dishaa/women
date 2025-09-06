@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Legal Chatbot</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chatbot</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex justify-center items-center h-screen">
-  <div class="bg-white shadow-lg rounded-xl w-96 p-4 flex flex-col">
-    <h2 class="text-xl font-bold mb-4">👩‍⚖️ Legal Chatbot</h2>
-    
-    <div id="chatbox" class="flex-1 overflow-y-auto border p-2 mb-3 h-64"></div>
-    
-    <div class="flex">
-      <input id="message" class="border flex-1 p-2 rounded-l" placeholder="Type your question..." />
-      <button onclick="sendMessage()" class="bg-blue-500 text-white px-4 rounded-r">Send</button>
+  <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-bold mb-4 text-center">🤖 Legal Chatbot</h2>
+    <div id="chat-box" class="h-64 overflow-y-auto border p-3 mb-4 rounded bg-gray-50 text-sm">
+      <div class="text-gray-600 mb-2">Bot: Hi 👋 I am your AI legal assistant. Ask me about women’s rights and laws in India.</div>
     </div>
+    <input id="user-input" class="border p-2 w-full rounded mb-2" placeholder="Type your question..." />
+    <button onclick="sendMessage()" class="bg-pink-600 text-white px-4 py-2 w-full rounded">Send</button>
   </div>
 
   <script>
     async function sendMessage() {
-      const msg = document.getElementById("message").value;
-      if (!msg) return;
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      if (!message) return;
+      input.value = "";
 
-      const chatbox = document.getElementById("chatbox");
-      chatbox.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+      const chatBox = document.getElementById("chat-box");
+      chatBox.innerHTML += `<div class="text-blue-600 mb-2"><b>You:</b> ${message}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
 
-      document.getElementById("message").value = "";
+      try {
+        const res = await fetch("/chatbot", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
 
-      const res = await fetch("/chat-legal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: msg })
-      });
-
-      const data = await res.json();
-      chatbox.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
-      chatbox.scrollTop = chatbox.scrollHeight;
+        const data = await res.json();
+        chatBox.innerHTML += `<div class="text-green-600 mb-2"><b>Bot:</b> ${data.reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } catch (err) {
+        chatBox.innerHTML += `<div class="text-red-600"><b>Bot:</b> ⚠️ Error connecting to server</div>`;
+      }
     }
   </script>
 </body>
