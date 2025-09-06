@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheRises</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+
+  <style>
+    /* Bubble container */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1; /* keep behind content */
+    }
+
+    .bubbles span {
+      position: absolute;
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: rgba(236, 72, 153, 0.2); /* pinkish bubbles */
+      border-radius: 50%;
+      bottom: -100px;
+      animation: rise 20s infinite;
+    }
+
+    /* Random bubble sizes and timings */
+    .bubbles span:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-duration: 15s; }
+    .bubbles span:nth-child(2) { left: 20%; width: 20px; height: 20px; animation-duration: 15s; animation-delay: 2s; }
+    .bubbles span:nth-child(3) { left: 35%; width: 60px; height: 60px; animation-duration: 10s; animation-delay: 2s; }
+    .bubbles span:nth-child(4) { left: 50%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: 2s; }
+    .bubbles span:nth-child(5) { left: 70%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 3s; }
+    .bubbles span:nth-child(6) { left: 80%; width: 25px; height: 25px; animation-duration: 12s; animation-delay: 2s; }
+    .bubbles span:nth-child(7) { left: 90%; width: 100px; height: 100px; animation-duration: 12s; animation-delay: 2s; }
+    .bubbles span:nth-child(8) { left: 90%; width: 100px; height: 100px; animation-duration: 18s; animation-delay: 2s; }
+    .bubbles span:nth-child(9) { left: 20%; width: 100px; height: 100px; animation-duration: 19s; animation-delay: 2s; }
+.bubbles span:nth-child(10) { left: 20%; width: 100px; height: 100px; animation-duration: 19s; animation-delay: 2s; }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
+    }
+
+
+      /* for emergency btn */
+       @keyframes inOut {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); } /* 1.15 = zoom out a bit */
+  }
+
+  .animate-inout {
+    animation: inOut 1.5s infinite ease-in-out;
+  }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-300 via-purple-300 to-pink-100 min-h-screen flex flex-col">
+
+  <!-- 🌸 Bubble background -->
+  <div class="bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500 text-white">
+        ❤️
+      </div>
+      <h1 class="text-xl font-bold text-gray-800">SheRises</h1>
+    </div>
+
+    <nav class="flex space-x-6">
+      <a href="/RightAndLaws" class="text-pink-500 text-base hover:text-pink-700">Rights And Laws</a>
+      <a href="/FirGuide" class="text-pink-500 text-base hover:text-pink-700">Fir Guide</a>
+      <a href="/FindHelp" class="text-pink-600 text-base hover:text-pink-800">Find Help</a>
+      <a href="/Blog" class="text-pink-600 text-base hover:text-pink-800">Blogs</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="flex flex-col items-center justify-center flex-1 text-center px-6">
+    <!-- Tagline badge -->
+    <div class="text-pink-600 font-medium text-lg drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]">
+      ❤️ Safe • Confidential • Supportive
+    </div>
+
+    <!-- Main Heading -->
+    <h2 class="mt-9 text-5xl sm:text-6xl font-bold text-pink-600 mb-4">
+      Your Voice <br />
+      <span class="mt-5 text-purple-700">Your Power</span>
+    </h2>
+
+    <!-- Subtext -->
+    <p class="mt-8 text-gray-800 max-w-2xl mb-8">
+      Get legal guidance, emergency support, and resources designed to protect and empower women everywhere.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex space-x-4">
+
+      <a href="tel:1091" 
+   class="animate-inout bg-pink-100 hover:bg-pink-200 text-pink-600 px-5 py-2 
+  rounded-full shadow-md font-medium flex items-center space-x-2">
+  <span>📞</span>
+  <span>Emergency Help</span>
+</a>
+
+     <a href="/RightAndLaws" 
+   class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-md font-medium">
+   Know Your Rights
+</a>
+
+    </div>
+
+    <section class="relative text-black py-12">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <!-- Feature 1 -->
+        <div>
+          <h2 class="text-3xl font-bold">24/7</h2>
+          <p class="mt-2 text-lg">Emergency Helpline Access</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div>
+          <h2 class="text-3xl font-bold">100%</h2>
+          <p class="mt-2 text-lg">Confidential</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div>
+          <h2 class="text-3xl font-bold">Free</h2>
+          <p class="mt-2 text-lg">Legal Guidance and resources</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- chatbot -->
+<div id="chatbot-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background: #e91e63; color: white; padding: 14px 18px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 999;">
+  💬
+</div>
+
+<div id="chatbot-window" 
+     style="display: none; position: fixed; bottom: 80px; right: 20px; width: 300px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden;">
+  <div style="background: #e91e63; color: white; padding: 10px; font-weight: bold;">
+    Chat Support
+    <span id="close-chat" style="float: right; cursor: pointer;">✖</span>
+  </div>
+  <div id="chat-content" style="padding: 10px; height: 300px; overflow-y: auto; font-size: 14px;">
+    <p><b>Bot:</b> Hi 👋, how can I help you today?</p>
+  </div>
+  <div style="padding: 8px; border-top: 1px solid #ddd; display: flex;">
+    <input type="text" id="chat-input" placeholder="Type your message..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 5px;">
+    <button id="send-btn" style="margin-left: 5px; background: #e91e63; color: white; border: none; padding: 6px 10px; border-radius: 5px;">Send</button>
+  </div>
+</div>
+
+<script>
+  const chatbotButton = document.getElementById("chatbot-button");
+  const chatbotWindow = document.getElementById("chatbot-window");
+  const closeChat = document.getElementById("close-chat");
+  const sendBtn = document.getElementById("send-btn");
+  const chatContent = document.getElementById("chat-content");
+  const chatInput = document.getElementById("chat-input");
+
+  chatbotButton.onclick = () => chatbotWindow.style.display = "block";
+  closeChat.onclick = () => chatbotWindow.style.display = "none";
+
+  sendBtn.onclick = () => {
+    const userMsg = chatInput.value.trim();
+    if(userMsg){
+      chatContent.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
+      chatInput.value = "";
+      
+      setTimeout(() => {
+        chatContent.innerHTML += `<p><b>Bot:</b> Thank you for reaching out. We will connect you to support soon 🙏</p>`;
+        chatContent.scrollTop = chatContent.scrollHeight;
+      }, 1000);
+    }
+  }
+</script>
+  </main>
+</body>
+</html>

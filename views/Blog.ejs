@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | SheRises</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
+    <h1 class="text-xl font-bold text-pink-600">SheRises</h1>
+    <nav class="flex space-x-8">
+      <a href="/" class="text-pink-500 hover:text-pink-700">Home</a>
+      <a href="/RightAndLaws" class="text-pink-500 hover:text-pink-700">Rights & Laws</a>
+      <a href="/FirGuide" class="text-pink-500 hover:text-pink-700">FIR Guide</a>
+      <a href="/FindHelp" class="text-pink-500 hover:text-pink-700">Find Help</a>
+      <a href="/Blog" class="text-pink-500 hover:text-pink-700">Blog</a>
+    </nav>
+  </header>
+
+  <main class="p-10 max-w-6xl mx-auto flex-1">
+
+    <!-- 🌸 Hero Banner -->
+
+    <div id="chatbot-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background: #e91e63; color: white; padding: 14px 18px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 999;">
+  💬
+</div>
+
+<div id="chatbot-window" 
+     style="display: none; position: fixed; bottom: 80px; right: 20px; width: 300px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden;">
+  <div style="background: #e91e63; color: white; padding: 10px; font-weight: bold;">
+    Chat Support
+    <span id="close-chat" style="float: right; cursor: pointer;">✖</span>
+  </div>
+  <div id="chat-content" style="padding: 10px; height: 300px; overflow-y: auto; font-size: 14px;">
+    <p><b>Bot:</b> Hi 👋, how can I help you today?</p>
+  </div>
+  <div style="padding: 8px; border-top: 1px solid #ddd; display: flex;">
+    <input type="text" id="chat-input" placeholder="Type your message..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 5px;">
+    <button id="send-btn" style="margin-left: 5px; background: #e91e63; color: white; border: none; padding: 6px 10px; border-radius: 5px;">Send</button>
+  </div>
+</div>
+
+<script>
+  const chatbotButton = document.getElementById("chatbot-button");
+  const chatbotWindow = document.getElementById("chatbot-window");
+  const closeChat = document.getElementById("close-chat");
+  const sendBtn = document.getElementById("send-btn");
+  const chatContent = document.getElementById("chat-content");
+  const chatInput = document.getElementById("chat-input");
+
+  chatbotButton.onclick = () => chatbotWindow.style.display = "block";
+  closeChat.onclick = () => chatbotWindow.style.display = "none";
+
+  sendBtn.onclick = () => {
+    const userMsg = chatInput.value.trim();
+    if(userMsg){
+      chatContent.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
+      chatInput.value = "";
+      
+      setTimeout(() => {
+        chatContent.innerHTML += `<p><b>Bot:</b> Thank you for reaching out. We will connect you to support soon 🙏</p>`;
+        chatContent.scrollTop = chatContent.scrollHeight;
+      }, 1000);
+    }
+  }
+</script>
+
+    <div class="rounded-2xl p-12 text-center 
+            bg-transparent 
+            hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 
+            transition duration-500">
+  <h1 class="text-4xl font-bold text-gray-900">Empower Women, Know Your Rights</h1>
+  <p class="mt-2 text-lg text-gray-700">Awareness • Inspiration • Updates</p>
+</div>
+
+
+   <!-- Success Stories -->
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-purple-700 mb-6">Success Stories</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+    <!-- Story Card 1 -->
+    <div onclick="openStory('Riya')" 
+         class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer">
+      <h4 class="text-lg font-bold text-pink-600">Riya – Rising Entrepreneur</h4>
+      <p class="text-gray-700 mt-2">
+        How Riya overcame struggles and built her own business empire.
+      </p>
+    </div>
+
+    <!-- Story Card 2 -->
+    <div onclick="openStory('Asha')" 
+         class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer">
+      <h4 class="text-lg font-bold text-pink-600">Asha – Her Victory</h4>
+      <p class="text-gray-700 mt-2">
+        Asha fought for equal rights and won a landmark workplace case.
+      </p>
+    </div>
+
+    <!-- Story Card 3 -->
+    <div onclick="openStory('Kavya')" 
+         class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer">
+      <h4 class="text-lg font-bold text-pink-600">Kavya – Shattering Silence</h4>
+      <p class="text-gray-700 mt-2">
+        Kavya spoke out against injustice and became a voice for change.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="storyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl p-8 max-w-lg text-center shadow-lg">
+    <h2 id="storyTitle" class="text-2xl font-bold text-pink-600"></h2>
+    <p id="storyContent" class="text-gray-700 mt-4"></p>
+    <button onclick="closeStory()" 
+            class="mt-6 px-6 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-700">
+      Close
+    </button>
+  </div>
+</div>
+
+<script>
+  const stories = {
+    Riya: {
+      title: "Riya – Rising Entrepreneur",
+      content: `Coming from a small village with limited resources, Riya refused to let circumstances define her. 
+She started a tiny tailoring shop with borrowed money, which grew into a successful clothing brand. 
+Today, she not only earns for herself but also employs other women, proving that dreams can rise even from the toughest beginnings.`
+    },
+    Asha: {
+      title: "Asha – Her Victory",
+      content: `Asha worked in a factory where women were underpaid and ignored. 
+Instead of staying silent, she encouraged her colleagues to fight with her. 
+After months of struggle, management introduced equal pay and better working conditions. 
+Her courage shows that one woman’s voice can spark change for many.`
+    },
+    Kavya: {
+      title: "Kavya – Shattering Silence",
+      content: `In her community, child marriage was still common. Kavya stood up against the practice and started educating girls about their rights. 
+Her campaign stopped several underage marriages and inspired families to send daughters to school. 
+She proved that change begins with one brave decision.`
+    }
+  };
+
+  function openStory(key) {
+    const story = stories[key];
+    document.getElementById("storyTitle").innerText = story.title;
+    document.getElementById("storyContent").innerText = story.content;
+    document.getElementById("storyModal").classList.remove("hidden");
+  }
+
+  function closeStory() {
+    document.getElementById("storyModal").classList.add("hidden");
+  }
+</script>
+
+
+    <!--  News & Updates -->
+<section>
+  <h2 class="text-2xl font-bold text-purple-700 mb-6">News & Updates</h2>
+
+  <!-- Tabs -->
+  <div class="flex space-x-6 mb-6 border-b pb-2">
+    <button class="tab-btn text-pink-600 font-semibold" data-tab="legal">Legal</button>
+    <button class="tab-btn text-gray-600 hover:text-pink-600" data-tab="schemes">Schemes</button>
+    <button class="tab-btn text-gray-600 hover:text-pink-600" data-tab="local">Local</button>
+  </div>
+
+  <!-- Legal Tab -->
+  <div id="legal" class="tab-content grid grid-cols-1 sm:grid-cols-2 gap-7">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?law" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">New Workplace Law Passed</h3>
+      <p class="text-gray-600">Government introduces stronger workplace harassment policies.</p>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?justice" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">Supreme Court Ruling</h3>
+      <p class="text-gray-600">Historic judgment expands protection for women under IPC.</p>
+    </div>
+  </div>
+
+  <!-- Schemes Tab -->
+  <div id="schemes" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 gap-7">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?women,help" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">New Govt Scheme for Rural Women</h3>
+      <p class="text-gray-600">Financial aid for women entrepreneurs in villages.</p>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?empowerment" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">Skill Training Programs</h3>
+      <p class="text-gray-600">Free vocational training launched for underprivileged women.</p>
+    </div>
+  </div>
+
+  <!-- Local Tab -->
+  <div id="local" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 gap-7">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?india,women" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">Delhi Launches Women Safety App</h3>
+      <p class="text-gray-600">A new app helps women alert police instantly.</p>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition">
+      <img src="https://source.unsplash.com/400x250/?city,news" class="rounded-lg mb-3"/>
+      <h3 class="font-bold text-pink-600">Mumbai Expands Helpline Centers</h3>
+      <p class="text-gray-600">More 24/7 support centers set up across the city.</p>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <script>
+    // Tab Switcher
+    const tabs = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("text-pink-600", "font-semibold"));
+        tab.classList.add("text-pink-600", "font-semibold");
+
+        contents.forEach(c => c.classList.add("hidden"));
+        document.getElementById(tab.dataset.tab).classList.remove("hidden");
+      });
+    });
+  </script>
+
+<!-- 💡 Motivation & Quotes -->
+<section class="mb-12 text-center">
+  <h2 class="text-2xl font-bold text-purple-700 mb-6">Motivation</h2>
+
+  <div id="quote-box" 
+       class="bg-white p-8 rounded-xl shadow-md max-w-2xl mx-auto transition duration-700">
+    <blockquote id="quote-text" class="italic text-xl text-pink-600">“She believed she could, so she did.”</blockquote>
+    <!--  <p id="quote-desc" class="mt-3 text-gray-700">🌸 A reminder to trust yourself and keep moving forward.</p> -->
+   </div> 
+</section>
+
+<script>
+  // Quotes list
+  const quotes = [
+    {
+      text: "“A strong woman doesn’t wait for permission—she creates her own path and inspires others to walk with her.”",
+      // desc: "🌸 A reminder to trust yourself and keep moving forward."
+    },
+    {
+      text: "“When women rise, societies shine brighter.”",
+      // desc: "💬 Speak up, inspire others, and create change."
+    },
+    {
+      text: "“Empowered women don’t just break barriers, they build bridges for others to cross.”",
+      // desc: "💪 Every challenge you overcome makes you stronger."
+    },
+    {
+      text: "“Your voice is your power—never let the world silence it.”",
+      // desc: "📚 Knowledge is the most powerful weapon for change."
+    }
+  ];
+
+  let index = 0;
+  const quoteText = document.getElementById("quote-text");
+  const quoteDesc = document.getElementById("quote-desc");
+
+  function changeQuote() {
+    index = (index + 1) % quotes.length; 
+    quoteText.innerText = quotes[index].text;
+    quoteDesc.innerText = quotes[index].desc;
+  }
+
+  // Change every 4 seconds
+  setInterval(changeQuote, 3000);
+</script>
+
+
+</body>
+</html>

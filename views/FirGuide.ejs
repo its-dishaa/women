@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIR Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-200 via-purple-100 to-pink-200 min-h-screen flex flex-col">
+
+<div id="chatbot-button" 
+     style="position: fixed; bottom: 20px; right: 20px; background: #e91e63; color: white; padding: 14px 18px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 999;">
+  💬
+</div>
+
+<div id="chatbot-window" 
+     style="display: none; position: fixed; bottom: 80px; right: 20px; width: 300px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden;">
+  <div style="background: #e91e63; color: white; padding: 10px; font-weight: bold;">
+    Chat Support
+    <span id="close-chat" style="float: right; cursor: pointer;">✖</span>
+  </div>
+  <div id="chat-content" style="padding: 10px; height: 300px; overflow-y: auto; font-size: 14px;">
+    <p><b>Bot:</b> Hi 👋, how can I help you today?</p>
+  </div>
+  <div style="padding: 8px; border-top: 1px solid #ddd; display: flex;">
+    <input type="text" id="chat-input" placeholder="Type your message..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 5px;">
+    <button id="send-btn" style="margin-left: 5px; background: #e91e63; color: white; border: none; padding: 6px 10px; border-radius: 5px;">Send</button>
+  </div>
+</div>
+
+<script>
+  const chatbotButton = document.getElementById("chatbot-button");
+  const chatbotWindow = document.getElementById("chatbot-window");
+  const closeChat = document.getElementById("close-chat");
+  const sendBtn = document.getElementById("send-btn");
+  const chatContent = document.getElementById("chat-content");
+  const chatInput = document.getElementById("chat-input");
+
+  chatbotButton.onclick = () => chatbotWindow.style.display = "block";
+  closeChat.onclick = () => chatbotWindow.style.display = "none";
+
+  sendBtn.onclick = () => {
+    const userMsg = chatInput.value.trim();
+    if(userMsg){
+      chatContent.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
+      chatInput.value = "";
+      
+      setTimeout(() => {
+        chatContent.innerHTML += `<p><b>Bot:</b> Thank you for reaching out. We will connect you to support soon 🙏</p>`;
+        chatContent.scrollTop = chatContent.scrollHeight;
+      }, 1000);
+    }
+  }
+</script>
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
+    <h1 class="text-xl font-bold text-black">SheRises</h1>
+    <nav class="flex space-x-8">
+      <a href="/" class="text-pink-500 hover:text-pink-700">Home</a>
+      <a href="/RightAndLaws" class="text-pink-500 hover:text-pink-700">Rights & Laws</a>
+      <a href="/FirGuide" class="text-pink-500 hover:text-pink-700">Fir Guide</a>
+      <a href="/FindHelp" class="text-pink-500 hover:text-pink-700">Find Help</a>
+      <a href="/Blog" class="text-pink-500 hover:text-pink-700">Blog</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-10">
+    <h2 class="text-3xl font-bold text-purple-700 mb-6 text-center">How to File an FIR</h2>
+    
+    <!-- Intro -->
+    <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-10">
+      A First Information Report (FIR) is a written document prepared by the police when they receive information 
+      about the commission of a cognizable offence. Here’s a step-by-step guide to help you.
+    </p>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-pink-600 mb-2">📌 Step 1: Visit Official Website</h3>
+        <p class="text-gray-700">Go to your State Police Official Website</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-pink-600 mb-2">📝 Step 2: Choose category</h3>
+        <p class="text-gray-700">Look for "Citizen Services" / "Lodge e-FIR" / "Report Lost Article".</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-pink-600 mb-2">✍️ Step 3: Fill Details</h3>
+        <p class="text-gray-700">Fill in details online – incident type, time, place, personal info, etc.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-pink-600 mb-2">📄 Step 4: Submit FIR</h3>
+        <p class="text-gray-700">Submit & receive acknowledgement – you’ll get an FIR number and a copy via email/SMS.Track FIR status online</p>
+      </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="mt-12 p-6 bg-purple-100 border border-purple-300 rounded-xl">
+      <h3 class="text-2xl font-bold text-purple-700 mb-3">⚖️ Important Rights</h3>
+      <ul class="list-disc list-inside text-gray-700 space-y-2">
+        <li>Police cannot refuse to register an FIR in case of a cognizable offence.</li>
+        <li>Women can lodge an FIR at any police station (Zero FIR concept).</li>
+        <li>You can request a female police officer to record your statement.</li>
+        <li>FIR can also be filed online in some states.</li>
+      </ul>
+    </div>
+
+    <!-- Extra Resource -->
+    <div class="mt-10 text-center">
+      <a href="https://delhipolice.gov.in/" 
+         target="_blank" 
+         class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg shadow-lg transition">
+        🚓 File FIR Online (Official Police Websites)
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>
