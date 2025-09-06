@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Legal Chatbot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+  <div class="bg-white shadow-lg rounded-xl w-96 p-4 flex flex-col">
+    <h2 class="text-xl font-bold mb-4">👩‍⚖️ Legal Chatbot</h2>
+    
+    <div id="chatbox" class="flex-1 overflow-y-auto border p-2 mb-3 h-64"></div>
+    
+    <div class="flex">
+      <input id="message" class="border flex-1 p-2 rounded-l" placeholder="Type your question..." />
+      <button onclick="sendMessage()" class="bg-blue-500 text-white px-4 rounded-r">Send</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const msg = document.getElementById("message").value;
+      if (!msg) return;
+
+      const chatbox = document.getElementById("chatbox");
+      chatbox.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+
+      document.getElementById("message").value = "";
+
+      const res = await fetch("/chat-legal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      });
+
+      const data = await res.json();
+      chatbox.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
