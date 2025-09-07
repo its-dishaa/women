@@ -20,38 +20,44 @@ app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
+
 // ---------------- Chatbot ----------------
-app.get("/chatbot", (req, res) => {
-  res.render("chatbot");  // 👈 must match chatbot.ejs exactly
-});
-
-
-
-app.post("/chatbot", async (req, res) => {
-  const userMessage = req.body.message;
-
-  try {
-    const response = await groq.chat.completions.create({
-    model: "llama-3.1-8b-instant",
-      messages: [
-        {
-          role: "system",
-          content: "You are a legal assistant for women in India...",
-        },
-        { role: "user", content: userMessage },
-      ],
-    });
-
-    res.json({ reply: response.choices[0].message.content });
-  } catch (err) {
-    console.error("❌ Groq Error:", err);
-    res.status(500).json({ reply: "⚠️ Something went wrong with Groq." });
-  }
+app.get("/Chatbot", (req, res) => {
+  res.render("Chatbot");  // 👈 must match chatbot.ejs exactly
 });
 
 // ---------------- Pages ----------------
+
+app.post("/Chatbot", async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    if (!message) return res.status(400).json({ reply: "Message is empty" });
+
+    // Temporary mock response (replace with GROQ logic later)
+    let reply = "Sorry, I don't understand that yet.";
+    if (message.toLowerCase().includes("rights")) {
+      reply = "Women in India have rights under laws like DV Act, IPC 354, 498A, etc.";
+    } else if (message.toLowerCase().includes("fir")) {
+      reply = "You can file an FIR at your local police station. I can guide you step by step.";
+    }
+
+    res.json({ reply });
+  } catch (err) {
+    console.error("Error in /chatbot:", err);
+    res.status(500).json({ reply: "⚠️ Server error, please try again later." });
+  }
+});
+
 app.get("/", (req, res) => {
-  res.render("landingpage");
+  res.render("Landingpage");
 });
 
 app.get("/RightAndLaws", (req, res) => {
@@ -147,3 +153,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
+
