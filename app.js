@@ -22,8 +22,10 @@ app.set("views", path.join(__dirname, "views"));
 
 // ---------------- Chatbot ----------------
 app.get("/chatbot", (req, res) => {
-  res.render("Chatbot");
+  res.render("chatbot");  // 👈 must match chatbot.ejs exactly
 });
+
+
 
 app.post("/chatbot", async (req, res) => {
   const userMessage = req.body.message;
