@@ -1,18 +1,15 @@
+require("dotenv").config();   // load .env before anything else
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
-const dotenv = require("dotenv");
-const OpenAI = require("openai");
+const { Groq } = require("groq-sdk");
 const { User, Law } = require("./usermodel");
 
-dotenv.config();
 const app = express();
 
 // ✅ Initialize OpenAI once
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -32,13 +29,12 @@ app.post("/chatbot", async (req, res) => {
   const userMessage = req.body.message;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // or "gpt-4" if available
+    const response = await groq.chat.completions.create({
+    model: "llama-3.1-8b-instant",
       messages: [
         {
           role: "system",
-          content:
-            "You are a legal assistant for women in India. Provide clear, supportive legal advice with references to relevant Indian laws wherever possible.",
+          content: "You are a legal assistant for women in India...",
         },
         { role: "user", content: userMessage },
       ],
@@ -46,10 +42,8 @@ app.post("/chatbot", async (req, res) => {
 
     res.json({ reply: response.choices[0].message.content });
   } catch (err) {
-    console.error("OpenAI Error:", err);
-    res
-      .status(500)
-      .json({ reply: "⚠️ Sorry, something went wrong. Please try again." });
+    console.error("❌ Groq Error:", err);
+    res.status(500).json({ reply: "⚠️ Something went wrong with Groq." });
   }
 });
 

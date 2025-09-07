@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SheRises</title>
+  <title>SheRises❤️</title>
   <script src="https://cdn.tailwindcss.com"></script> 
 
   <style>
@@ -15,7 +15,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: -1; /* keep behind content */
+      z-index: -1; 
     }
 
     .bubbles span {
@@ -84,11 +84,12 @@
     </div>
 
     <nav class="flex space-x-6">
-      <a href="/RightAndLaws" class="text-pink-500 text-base hover:text-pink-700">Rights And Laws</a>
-      <a href="/FirGuide" class="text-pink-500 text-base hover:text-pink-700">Fir Guide</a>
-      <a href="/FindHelp" class="text-pink-600 text-base hover:text-pink-800">Find Help</a>
-      <a href="/Blog" class="text-pink-600 text-base hover:text-pink-800">Blogs</a>
-      <a href="/chatbot" class="text-pink-600 text-base hover:text-pink-800">Legal Assisstant</a>
+      <a href="/" class="text-pink-500 hover:text-pink-700 font-semibold">Home</a>
+      <a href="/RightAndLaws" class="text-pink-500 text-base hover:text-pink-700 font-semibold">Rights And Laws</a>
+      <a href="/FirGuide" class="text-pink-500 text-base hover:text-pink-700 font-semibold">Fir Guide</a>
+      <a href="/FindHelp" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Find Help</a>
+      <a href="/Blog" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Blogs</a>
+      <a href="/chatbot" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Legal Assisstant</a>
       
     </nav>
   </header>
@@ -114,7 +115,7 @@
     <!-- CTA Buttons -->
     <div class="flex space-x-4">
 
-      <a href="tel:1091" 
+      <a href="tel:9716849494" 
    class="animate-inout bg-pink-100 hover:bg-pink-200 text-pink-600 px-5 py-2 
   rounded-full shadow-md font-medium flex items-center space-x-2">
   <span>📞</span>
@@ -149,103 +150,6 @@
         </div>
       </div>
     </section>
-
-    <!-- chatbot -->
-<!-- Chatbot Button -->
-<div id="chatbot-button" 
-     style="position: fixed; bottom: 20px; right: 20px; background: #e91e63; color: white; padding: 14px 18px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 999;">
-  💬
-</div>
-
-<!-- Chatbot Window -->
-<div id="chatbot-window" 
-     style="display: none; position: fixed; bottom: 80px; right: 20px; width: 320px; height: 420px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; overflow: hidden;">
-  <div style="background: #e91e63; color: white; padding: 10px; font-weight: bold;">
-    Legal Chatbot 
-    <span id="close-chat" style="float: right; cursor: pointer;">✖</span>
-  </div>
-  <div id="chat-content" style="padding: 10px; height: 300px; overflow-y: auto; font-size: 14px;">
-    <p><b>Bot:</b> Hi,Ask me anything!</p>
-  </div>
-  <div style="padding: 8px; border-top: 1px solid #ddd; display: flex;">
-    <input type="text" id="chat-input" placeholder="Type your message..." 
-           style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 5px;">
-    <button id="send-btn" 
-            style="margin-left: 5px; background: #e91e63; color: white; border: none; padding: 6px 10px; border-radius: 5px;">Send</button>
-  </div>
-</div>
-
-<script>
-  const chatbotButton = document.getElementById("chatbot-button");
-  const chatbotWindow = document.getElementById("chatbot-window");
-  const closeChat = document.getElementById("close-chat");
-  const sendBtn = document.getElementById("send-btn");
-  const chatContent = document.getElementById("chat-content");
-  const chatInput = document.getElementById("chat-input");
-
-  // Predefined responses (simple rule-based)
-  const responses = {
-  "fir": "You can file an FIR at any police station. Police cannot refuse to register it. Dial 100 / 112 in emergencies.",
-  "domestic violence": " The Protection of Women from Domestic Violence Act, 2005 ensures your right to protection, residence, and maintenance.",
-  "dowry": "Giving or taking dowry is illegal under the Dowry Prohibition Act, 1961. You can report it at your local police station.",
-  "workplace harassment": "Sexual harassment at the workplace is punishable under the POSH Act, 2013. Every workplace must have an Internal Complaints Committee.",
-  "legal aid": " Free legal aid is available via District Legal Services Authority. You can contact 15100 helpline.",
-  "marital rape": " Marital rape is not criminalized in India, but forced sex can be grounds for divorce under cruelty. You can also seek protection under Domestic Violence Act.",
-  "cyber crime": "For online harassment, stalking, or abuse, file a complaint at cybercrime.gov.in or dial 1930 helpline.",
-  "stalking": "Stalking (online or physical) is a criminal offence under Section 354D IPC. You can directly file an FIR.",
-  "acid attack": "The Supreme Court banned over-the-counter acid sales. Victims are entitled to free medical treatment and ₹3 lakh compensation from the state.",
-  "rape": " Rape survivors have the right to free medical treatment, legal aid, and protection of identity. FIR must be registered immediately under Section 376 IPC.",
-  "child marriage": "The Prohibition of Child Marriage Act, 2006 makes child marriage illegal. Minimum legal age is 18 for women.",
-  "property rights": "Under Hindu Succession (Amendment) Act, 2005, daughters have equal rights to ancestral property as sons.",
-  "maternity": "The Maternity Benefit Act, 1961 ensures 26 weeks of paid leave for women in workplaces with 10+ employees.",
-  "abortion": " The Medical Termination of Pregnancy (Amendment) Act, 2021 allows abortion up to 24 weeks under certain conditions.",
-  "helpline": " Emergency helplines: Women Helpline 181, Police 100, Cybercrime 1930, Childline 1098, Domestic Violence 1091.",
-  "inheritance": "Women have equal inheritance rights under Hindu, Christian, and Parsi laws. Muslim women are also entitled to a share under Shariat Law.",
-  "maintenance": " Under Section 125 CrPC, a woman can claim maintenance from her husband if she is unable to support herself.",
-  "divorce": "Divorce laws differ by religion, but women can seek divorce on grounds of cruelty, desertion, adultery, etc. Fast-track family courts are available.",
-  "police": " Police must record your FIR in writing and give you a copy for free. Women cannot be arrested after sunset or before sunrise.",
-  "arrest rights": "Women can only be arrested in presence of a female constable and never after 6 PM without a magistrate’s approval.",
-  "self defense": " Women have the legal right to self-defense under IPC Section 96–106. Any act to protect yourself from assault is not a crime.",
-  "trafficking": " Human trafficking is a crime under Section 370 IPC. You can call 1098 Childline or 181 Women Helpline to report.",
-  "education": " Under the Right to Education Act, free & compulsory education is available for girls up to 14 years.",
-  "reservation": " Many state and central schemes provide reservation for women in education, government jobs, and local governance.",
-  "widow rights": " Widows are entitled to property rights, pensions, and government schemes such as Indira Gandhi Widow Pension Yojana.",
-  "sexual assault": " Under IPC Sections 354, 354A, 354B, 354C, 354D, any assault, groping, or harassment is punishable by law.",
-  "eve teasing": " Eve-teasing is punishable under Section 509 IPC (insulting the modesty of a woman). You can immediately report it.",
-  "custody": "Courts usually grant custody of children to mothers, considering the child’s welfare as the top priority.",
-  "passport": "A married woman does not need her husband’s consent for passport, job, or travel. She has equal independence under law."
-
-};
-
-
-  // Show/Hide Chat
-  chatbotButton.onclick = () => chatbotWindow.style.display = "block";
-  closeChat.onclick = () => chatbotWindow.style.display = "none";
-
-  // Send Message
-  sendBtn.onclick = () => {
-    const userMsg = chatInput.value.trim();
-    if(userMsg){
-      chatContent.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
-      chatInput.value = "";
-
-      // Bot response (keyword matching)
-      let reply = "🙏 I'm not sure, but you can reach Women Helpline 181 for help.";
-      for (let key in responses) {
-        if (userMsg.toLowerCase().includes(key)) {
-          reply = responses[key];
-          break;
-        }
-      }
-
-      setTimeout(() => {
-        chatContent.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
-        chatContent.scrollTop = chatContent.scrollHeight;
-      }, 600);
-    }
-  };
-</script>
-
 
   </main>
 </body>

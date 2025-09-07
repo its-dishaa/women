@@ -3,44 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chatbot</title>
+  <title>SheRises - Legal Assistant</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
 </head>
-<body class="bg-gray-100 flex justify-center items-center h-screen">
-  <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-    <h2 class="text-xl font-bold mb-4 text-center">🤖 Legal Chatbot</h2>
-    <div id="chat-box" class="h-64 overflow-y-auto border p-3 mb-4 rounded bg-gray-50 text-sm">
-      <div class="text-gray-600 mb-2">Bot: Hi 👋 I am your AI legal assistant. Ask me about women’s rights and laws in India.</div>
+<body class="bg-gradient-to-br from-pink-300 via-purple-300 to-pink-100 min-h-screen flex flex-col">
+
+
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500 text-white">❤️</div>
+      <h1 class="text-xl font-bold text-gray-800">SheRises</h1>
     </div>
-    <input id="user-input" class="border p-2 w-full rounded mb-2" placeholder="Type your question..." />
-    <button onclick="sendMessage()" class="bg-pink-600 text-white px-4 py-2 w-full rounded">Send</button>
-  </div>
+    <nav class="flex space-x-6">
+      <a href="/" class="text-pink-500 hover:text-pink-700 font-semibold">Home </a>
+      <a href="/RightAndLaws" class="text-pink-500 hover:text-pink-700 font-semibold">Rights And Laws</a>
+      <a href="/FirGuide" class="text-pink-500 hover:text-pink-700 font-semibold">Fir Guide</a>
+      <a href="/FindHelp" class="text-pink-600 hover:text-pink-800 font-semibold">Find Help</a>
+      <a href="/Blog" class="text-pink-600 hover:text-pink-800 font-semibold">Blogs</a>
+      <a href="/chatbot" class="text-pink-600 font-semibold">Legal Assistant</a>
+        </nav>
+  </header>
 
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById("user-input");
-      const message = input.value.trim();
-      if (!message) return;
-      input.value = "";
+  <!-- Chatbot Section -->
+  <main class="flex flex-1 justify-center items-center px-4 py-10">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-xl overflow-hidden">
+      <!-- Header -->
+      <div class="bg-pink-600 text-white px-4 py-3 font-semibold">💬 Legal Assistant</div>
+      <!-- Chat Content -->
+      <div id="chat-content" class="p-4 h-96 overflow-y-auto text-sm space-y-2">
+        <p><b>Bot:</b> Hi 👋 I am your AI legal assistant. Ask me about women’s rights and laws in India.</p>
+      </div>
+      <!-- Input -->
+      <div class="flex border-t border-gray-200 p-2">
+        <input id="chat-input" type="text" placeholder="Type your message..."
+          class="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500" />
+        <button id="send-btn" class="ml-2 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg text-sm">Send</button>
+      </div>
+    </div>
+  </main>
 
-      const chatBox = document.getElementById("chat-box");
-      chatBox.innerHTML += `<div class="text-blue-600 mb-2"><b>You:</b> ${message}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
+<script>
+  const sendBtn = document.getElementById("send-btn");
+  const chatContent = document.getElementById("chat-content");
+  const chatInput = document.getElementById("chat-input");
+
+  sendBtn.onclick = async () => {
+    const userMsg = chatInput.value.trim();
+    if (userMsg) {
+      chatContent.innerHTML += `<p><b>You:</b> ${userMsg}</p>`;
+      chatInput.value = "";
 
       try {
         const res = await fetch("/chatbot", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message }),
+          body: JSON.stringify({ message: userMsg })
         });
 
         const data = await res.json();
-        chatBox.innerHTML += `<div class="text-green-600 mb-2"><b>Bot:</b> ${data.reply}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        chatContent.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+        chatContent.scrollTop = chatContent.scrollHeight;
       } catch (err) {
-        chatBox.innerHTML += `<div class="text-red-600"><b>Bot:</b> ⚠️ Error connecting to server</div>`;
+        chatContent.innerHTML += `<p><b>Bot:</b> ⚠️ Server error, please try again later.</p>`;
       }
     }
-  </script>
+  };
+</script>
+
+
 </body>
 </html>
