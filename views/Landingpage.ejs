@@ -78,7 +78,14 @@
   <header class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
     <div class="flex items-center space-x-2">
       <div class="w-8 h-8 flex items-center justify-center rounded-full bg-pink-500 text-white">
-        ❤️
+        
+        <!-- Shield Icon SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+             2 6 4 4 6.5 4c1.74 0 3.41 1.01 4.13 2.44h1.75C14.09 5.01 
+             15.76 4 17.5 4 20 4 22 6 22 8.5c0 3.78-3.4 
+             6.86-8.55 11.54L12 21.35z"/>
+  </svg>
       </div>
       <h1 class="text-xl font-bold text-gray-800">SheRises</h1>
     </div>
@@ -90,7 +97,6 @@
       <a href="/FindHelp" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Find Help</a>
       <a href="/Blog" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Blogs</a>
       <a href="/chatbot" class="text-pink-600 text-base hover:text-pink-800 font-semibold">Legal Assisstant</a>
-      
     </nav>
   </header>
 
@@ -127,6 +133,10 @@
    Know Your Rights
 </a>
 
+<a href="/Report" 
+   class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-md hover:from-pink-600 hover:to-purple-700 transition">
+   Report Anonymously
+</a>
     </div>
 
     <section class="relative text-black py-12">
@@ -150,7 +160,50 @@
         </div>
       </div>
     </section>
-
   </main>
+
+  <div class="flex justify-center gap-6 mt-8">
+  <div id="reportModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-lg w-96 p-6 relative">
+      <button onclick="closeReportForm()" 
+        class="absolute top-3 right-3 text-gray-500 hover:text-red-600 text-xl">
+        ✖
+      </button>
+      <h2 class="text-xl font-bold mb-4 text-center">Submit Anonymous Report</h2>
+      <form onsubmit="submitAnonymousReport(event)">
+        <label class="block mb-2">Category</label>
+        <input type="text" id="category" class="w-full p-2 border rounded mb-4" required>
+        <label class="block mb-2">Description</label>
+        <textarea id="description" rows="4" class="w-full p-2 border rounded mb-4" required></textarea>
+        <button type="submit" class="w-full bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Script -->
+  <script>
+    function openReportForm() {
+      document.getElementById("reportModal").classList.remove("hidden");
+    }
+    function closeReportForm() {
+      document.getElementById("reportModal").classList.add("hidden");
+    }
+    async function submitAnonymousReport(e) {
+      e.preventDefault();
+      const category = document.getElementById("category").value;
+      const description = document.getElementById("description").value;
+      // Send to backend API
+      await fetch("/api/reports/anonymous", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category, description })
+      });
+      alert("✅ Your report has been submitted anonymously.");
+      closeReportForm();
+    }
+  </script>
+
 </body>
 </html>

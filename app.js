@@ -168,10 +168,25 @@ app.get("/FirGuide", (req, res) => res.render("FirGuide"));
 app.get("/FindHelp", (req, res) => res.render("FindHelp"));
 app.get("/Blog", (req, res) => res.render("Blog"));
 
-app.post("/request-help", (req, res) => {
-  console.log("Help Request Received:", req.body);
-  res.redirect("/FindHelp?success=1");
+// app.post("/Report", (req, res) => {
+//   console.log("Help Request Received:", req.body);
+//   res.redirect("/FindHelp?success=1");
+// });
+app.get("/Report", (req, res) => {
+  res.render("Report");   // will load views/Report.ejs
 });
+
+// Anonymous Report submission
+app.post("/Report", (req, res) => {
+  const { category, description } = req.body;
+
+  console.log("📢 Anonymous Report:", { category, description });
+
+  // TODO: Save to DB or send email/alert
+  res.redirect("/?report=success");  
+});
+
+
 
 // ---------------- Start Server ----------------
 const PORT = process.env.PORT || 3000;

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anonymous Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-pink-100">
+
+  <div class="bg-white rounded-xl shadow-lg w-96 p-6 relative">
+    <h2 class="text-xl font-bold mb-4 text-center">Submit Anonymous Report</h2>
+
+    <form action="/Report" method="POST" class="space-y-4">
+
+      <!-- Incident Description -->
+      <div>
+        <label class="block mb-1 font-medium">Incident Description *</label>
+        <textarea name="description" rows="4" 
+          class="w-full p-2 border rounded" required></textarea>
+      </div>
+
+            <div>
+        <label class="block mb-1 font-medium">Category/Type of Issue *</label>
+        <select name="category" class="w-full p-2 border rounded" required>
+          <option value="">-- Select Category --</option>
+          <option value="Harassment">Harassment</option>
+          <option value="Abuse">Abuse</option>
+          <option value="Domestic Violence">Domestic Violence</option>
+          <option value="Workplace Misconduct">Workplace Misconduct</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Date/Time -->
+      <div>
+        <label class="block mb-1 font-medium">Date/Time of Incident (optional)</label>
+        <input type="datetime-local" name="datetime" 
+          class="w-full p-2 border rounded">
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label class="block mb-1 font-medium">Location (optional)</label>
+        <input type="text" name="location" placeholder="e.g., Market area, Bus stop" 
+          class="w-full p-2 border rounded">
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" 
+        class="w-full bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700">
+        Submit Report
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

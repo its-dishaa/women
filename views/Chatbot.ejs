@@ -31,10 +31,10 @@
   <main class="flex flex-1 justify-center items-center px-4 py-10">
     <div class="w-full max-w-md bg-white rounded-xl shadow-xl overflow-hidden">
       <!-- Header -->
-      <div class="bg-pink-600 text-white px-4 py-3 font-semibold">💬 Legal Assistant</div>
+      <div class="bg-pink-600 text-white px-4 py-3 font-semibold">Legal Assistant</div>
       <!-- Chat Content -->
       <div id="chat-content" class="p-4 h-96 overflow-y-auto text-sm space-y-2">
-        <p><b>Bot:</b> Hi 👋 I am your AI legal assistant. Ask me about women’s rights and laws in India.</p>
+        <p><b>Bot:</b> Hi, I am your AI legal assistant. Ask me about women’s rights and laws in India.</p>
       </div>
       <!-- Input -->
       <div class="flex border-t border-gray-200 p-2">
@@ -67,7 +67,7 @@
         chatContent.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
         chatContent.scrollTop = chatContent.scrollHeight;
       } catch (err) {
-        chatContent.innerHTML += `<p><b>Bot:</b> ⚠️ Server error, please try again later.</p>`;
+        chatContent.innerHTML += `<p><b>Bot:</b> Server error, please try again later.</p>`;
       }
     }
   };
