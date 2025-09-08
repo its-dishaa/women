@@ -35,26 +35,51 @@ app.get("/Chatbot", (req, res) => {
 
 // ---------------- Pages ----------------
 
-app.post("/Chatbot", async (req, res) => {
+// app.post("/Chatbot", async (req, res) => {
+//   try {
+//     const { message } = req.body;
+
+//     if (!message) return res.status(400).json({ reply: "Message is empty" });
+
+//     // Temporary mock response (replace with GROQ logic later)
+//     let reply = "Sorry, I don't understand that yet.";
+//     if (message.toLowerCase().includes("rights")) {
+//       reply = "Women in India have rights under laws like DV Act, IPC 354, 498A, etc.";
+//     } else if (message.toLowerCase().includes("fir")) {
+//       reply = "You can file an FIR at your local police station. I can guide you step by step.";
+//     }
+
+//     res.json({ reply });
+//   } catch (err) {
+//     console.error("Error in /Chatbot:", err);
+//     res.status(500).json({ reply: "⚠️ Server error, please try again later." });
+//   }
+// });
+
+app.post("/chatbot", async (req, res) => {
   try {
     const { message } = req.body;
-
     if (!message) return res.status(400).json({ reply: "Message is empty" });
 
-    // Temporary mock response (replace with GROQ logic later)
-    let reply = "Sorry, I don't understand that yet.";
-    if (message.toLowerCase().includes("rights")) {
-      reply = "Women in India have rights under laws like DV Act, IPC 354, 498A, etc.";
-    } else if (message.toLowerCase().includes("fir")) {
-      reply = "You can file an FIR at your local police station. I can guide you step by step.";
-    }
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.1-8b-instant",
+      messages: [
+        { role: "system", content: "You are a helpful legal assistant knowledgeable about Indian women's rights and laws." },
+        { role: "user", content: message }
+      ],
+      temperature: 0.3,
+      max_tokens: 300
+    });
 
+    const reply = completion.choices[0]?.message?.content || "⚠️ Sorry, I couldn't generate a response.";
     res.json({ reply });
   } catch (err) {
-    console.error("Error in /chatbot:", err);
+    console.error("❌ Error in /chatbot:", err);
     res.status(500).json({ reply: "⚠️ Server error, please try again later." });
   }
 });
+
+
 
 app.get("/", (req, res) => {
   res.render("Landingpage");

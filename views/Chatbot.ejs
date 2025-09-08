@@ -23,7 +23,7 @@
       <a href="/FirGuide" class="text-pink-500 hover:text-pink-700 font-semibold">FIR Guide</a>
       <a href="/FindHelp" class="text-pink-600 hover:text-pink-800 font-semibold">Find Help</a>
       <a href="/Blog" class="text-pink-600 hover:text-pink-800 font-semibold">Blogs</a>
-      <a href="/chatbot" class="text-pink-600 font-semibold">Legal Assistant</a>
+      <a href="/Chatbot" class="text-pink-600 font-semibold">Legal Assistant</a>
         </nav>
   </header>
 
@@ -57,7 +57,7 @@
       chatInput.value = "";
 
       try {
-        const res = await fetch("/chatbot", {
+        const res = await fetch("/Chatbot", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: userMsg })
